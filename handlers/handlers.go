@@ -15,7 +15,8 @@ func SampleRequest(c *gin.Context) {
 
 func GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
-	product := database.GetProductSku(sku)
+	country := c.Query("country")
+	product := database.GetProductSku(sku, country)
 	c.JSON(http.StatusOK, gin.H{
 		"message": product,
 	})
