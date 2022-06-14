@@ -51,3 +51,12 @@ func BulkUpload(products *[]models.Product) {
 		}(product)
 	}
 }
+
+func SwitchSellBuy(product *models.Product) {
+	if int(product.Stock) < 0 {
+		MakeOrder(product)
+	} else {
+		ProductCreate(product)
+	}
+
+}
