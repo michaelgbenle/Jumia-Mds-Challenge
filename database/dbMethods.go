@@ -58,5 +58,5 @@ func SwitchSellBuy(product *models.Product) {
 	} else {
 		ProductCreate(product)
 	}
-
 }
+func ProductCreate() {}
