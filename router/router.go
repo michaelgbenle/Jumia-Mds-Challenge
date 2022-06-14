@@ -12,8 +12,10 @@ func SetupRouter(port string, db *gorm.DB) {
 		c.Set("db", db)
 	})
 
-	router.GET("/")
-	router.POST("")
+	apirouter := router.Group("/api/v1")
+
+	apirouter.GET("/")
+	apirouter.POST("")
 	router.POST("")
 	router.POST("")
 	router.POST("")
