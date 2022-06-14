@@ -15,4 +15,7 @@ func consumeStock(product models.Product) models.Order {
 	initialStock := int(math.Abs(float64(product.Stock)))
 	Db.First(product, "sku=?", product.Sku)
 
+	order := models.Order{
+		ProductId: product.ID,
+	}
 }
