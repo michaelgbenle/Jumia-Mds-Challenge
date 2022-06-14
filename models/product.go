@@ -7,5 +7,5 @@ type Product struct {
 	Country string `json:"country"`
 	Sku     string `json:"sku"`
 	Name    string `json:"name"`
-	Stock   uint   `json:"stock"`
+	Stock   int    `json:"stock"`
 }
