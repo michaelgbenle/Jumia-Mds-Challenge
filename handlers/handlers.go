@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/michaelgbenle/jumiaMds/database"
+	"github.com/michaelgbenle/jumiaMds/models"
 	"net/http"
 )
 
@@ -20,5 +21,5 @@ func GetProductBySku(c *gin.Context) {
 	})
 }
 func ConsumeStock(c *gin.Context) {
-
+	product := &models.Product{}
 }
