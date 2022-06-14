@@ -36,4 +36,8 @@ func ConsumeStock(c *gin.Context) {
 	})
 }
 
-func BulkUpdate(c *gin.Context) {}
+func BulkUpdate(c *gin.Context) {
+	var bulkUpload []models.Product
+	err := c.ShouldBindJSON(&bulkUpload)
+
+}
