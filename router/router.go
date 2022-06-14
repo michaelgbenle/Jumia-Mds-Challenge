@@ -17,7 +17,7 @@ func SetupRouter(port string, db *gorm.DB) {
 	apirouter.GET("/")
 	apirouter.POST("")
 	apirouter.POST("")
-	router.POST("")
+	apirouter.POST("")
 	router.POST("")
 	router.POST("")
 }
