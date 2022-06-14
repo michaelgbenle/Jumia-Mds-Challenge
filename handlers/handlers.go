@@ -8,3 +8,9 @@ func SampleRequest(c *gin.Context) {
 		"ping": "pong",
 	})
 }
+
+func GetProductBySku(c *gin.Context){
+	sku:=c.Query("sku")
+	countrCode :=c.Query("country")
+	products:=
+}
