@@ -32,5 +32,7 @@ func ConsumeStock(c *gin.Context) {
 	//result := services.MakeOrder(product)
 	//return ctx.Status(http.StatusOK).JSON(result)
 	stockSold := database.consumeStock(product)
-	c.JSON(http.StatusOK, gin.H{})
+	c.JSON(http.StatusOK, gin.H{
+		"message": stockSold,
+	})
 }
