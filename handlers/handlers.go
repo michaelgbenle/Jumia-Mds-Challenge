@@ -30,7 +30,7 @@ func ConsumeStock(c *gin.Context) {
 			"error": "error binding json",
 		})
 	}
-	stockSold := database.SellStock(product)
+	stockSold := database.SellStock(&product)
 	c.JSON(http.StatusOK, gin.H{
 		"message": stockSold,
 	})
