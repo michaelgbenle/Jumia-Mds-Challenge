@@ -45,5 +45,8 @@ func BulkUpdate(c *gin.Context) {
 		})
 	}
 	database.bulkUpload(&bulkUpload)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Bulk update successful",
+	})
 
 }
