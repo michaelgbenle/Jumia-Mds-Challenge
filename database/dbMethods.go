@@ -36,6 +36,6 @@ func SellStock(product *models.Product) models.Order {
 	return order
 }
 
-func bulkUpload(products *[]models.Product) {
+func BulkUpload(products *[]models.Product) {
 
 }

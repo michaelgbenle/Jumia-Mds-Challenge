@@ -44,7 +44,7 @@ func BulkUpdate(c *gin.Context) {
 			"error": "error binding json",
 		})
 	}
-	database.bulkUpload(&bulkUpload)
+	database.BulkUpload(&bulkUpload)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
 	})
