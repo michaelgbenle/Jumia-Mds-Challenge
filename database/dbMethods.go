@@ -44,5 +44,10 @@ func BulkUpload(products *[]models.Product) {
 	for _, product := range *products {
 		wg.Add(1)
 		dbconnections <- 1
+		go func(product models.Product) {
+			SwitchSellBuy(&product)
+			wg.Done()
+			<-dbconnections
+		}(product)
 	}
 }
