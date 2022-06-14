@@ -27,7 +27,10 @@ func SellStock(product *models.Product) models.Order {
 		return order
 	}
 
+	//create the order
 	Db.Create(&order)
+
+	//Update product amount to reflect change
 
 	return order
 }
