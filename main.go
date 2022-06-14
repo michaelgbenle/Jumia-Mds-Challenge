@@ -18,6 +18,6 @@ func main() {
 
 	err = jumia.Run(":" + port)
 	if err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
 }
