@@ -44,5 +44,6 @@ func BulkUpdate(c *gin.Context) {
 			"error": "error binding json",
 		})
 	}
+	database.bulkUpload(&bulkUpload)
 
 }
