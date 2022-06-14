@@ -25,6 +25,8 @@ func ConsumeStock(c *gin.Context) {
 	product := &models.Product{}
 	err := c.ShouldBindJSON(product)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{})
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "error binding json",
+		})
 	}
 }
