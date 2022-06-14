@@ -11,7 +11,7 @@ func GetProductSku(sku string) models.Product {
 	return product
 }
 
-func consumeStock(product models.Product) models.Order {
+func SellStock(product models.Product) models.Order {
 	initialStock := int(math.Abs(float64(product.Stock)))
 	Db.First(product, "sku=?", product.Sku)
 
@@ -19,5 +19,6 @@ func consumeStock(product models.Product) models.Order {
 		ProductId: product.ID,
 		Amount:    uint(initialStock),
 	}
+
 	return order
 }
