@@ -4,7 +4,10 @@ import (
 	"github.com/michaelgbenle/jumiaMds/models"
 	"log"
 	"math"
+	"sync"
 )
+
+var wg sync.WaitGroup
 
 func GetProductSku(sku, country string) models.Product {
 	product := models.Product{}
@@ -38,5 +41,7 @@ func SellStock(product *models.Product) models.Order {
 
 func BulkUpload(products *[]models.Product) {
 	dbconnections := make(chan int, 90)
+	for _, product := range *products {
 
+	}
 }
