@@ -27,5 +27,7 @@ func SellStock(product *models.Product) models.Order {
 		return order
 	}
 
+	Db.Create(&order)
+
 	return order
 }
