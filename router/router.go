@@ -10,11 +10,6 @@ func SetupRouter() *gin.Engine {
 	apirouter := router.Group("/api/v1")
 
 	apirouter.GET("/")
-	apirouter.POST("")
-	apirouter.POST("")
-	apirouter.POST("")
-	apirouter.POST("")
-	apirouter.POST("")
 
 	return router
 }
