@@ -9,3 +9,7 @@ func GetProductSku(sku string) models.Product {
 	Db.Where("sku= ?", sku).First(product)
 	return product
 }
+
+func consumeStock(product models.Product) models.Order {
+
+}
