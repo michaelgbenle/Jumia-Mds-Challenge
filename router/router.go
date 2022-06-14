@@ -17,7 +17,7 @@ func SetupRouter() *gin.Engine {
 	apirouter := router.Group("/api/v1")
 
 	apirouter.GET("/", handlers.SampleRequest)
-	apirouter.GET("/", handlers.SampleRequest)
+	apirouter.GET("/", handlers.GetProductBySku)
 
 	return router
 }
