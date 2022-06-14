@@ -29,4 +29,6 @@ func ConsumeStock(c *gin.Context) {
 			"error": "error binding json",
 		})
 	}
+	//result := services.MakeOrder(product)
+	//return ctx.Status(http.StatusOK).JSON(result)
 }
