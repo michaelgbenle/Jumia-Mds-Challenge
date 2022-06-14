@@ -2,7 +2,6 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"os"
 )
 
 func SetupRouter() *gin.Engine {
@@ -17,9 +16,5 @@ func SetupRouter() *gin.Engine {
 	apirouter.POST("")
 	apirouter.POST("")
 
-	port := ":" + os.Getenv("PORT")
-	if port == ":" {
-		port = ":8081"
-	}
 	return router
 }
