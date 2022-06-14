@@ -6,6 +6,6 @@ import (
 
 func GetProductSku(sku string) models.Product {
 	product := models.Product{}
-	Db.Where("sku= ?", sku)
+	Db.Where("sku= ?", sku).First(product)
 	return product
 }
