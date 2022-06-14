@@ -26,5 +26,8 @@ func SetupDb() {
 	}
 	Db = db
 
-	Db.AutoMigrate(models.Order{}, models.Product{})
+	err = Db.AutoMigrate(models.Order{}, models.Product{})
+	if err != nil {
+		log.Fatal(err)
+	}
 }
