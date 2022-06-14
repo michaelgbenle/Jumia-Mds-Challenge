@@ -30,7 +30,6 @@ func ConsumeStock(c *gin.Context) {
 		})
 	}
 
-	//return ctx.Status(http.StatusOK).JSON(result)
 	stockSold := database.consumeStock(product)
 	c.JSON(http.StatusOK, gin.H{
 		"message": stockSold,
