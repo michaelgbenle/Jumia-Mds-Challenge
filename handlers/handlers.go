@@ -35,3 +35,5 @@ func ConsumeStock(c *gin.Context) {
 		"message": stockSold,
 	})
 }
+
+func BulkUpdate(c *gin.Context) {}
