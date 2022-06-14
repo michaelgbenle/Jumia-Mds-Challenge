@@ -22,7 +22,7 @@ func GetProductBySku(c *gin.Context) {
 }
 
 func ConsumeStock(c *gin.Context) {
-	product := &models.Product{}
+	product := models.Product{}
 	err := c.ShouldBindJSON(product)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
