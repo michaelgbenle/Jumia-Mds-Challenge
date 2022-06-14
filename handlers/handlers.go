@@ -1,6 +1,9 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/michaelgbenle/jumiaMds/database"
+)
 
 func SampleRequest(c *gin.Context) {
 
@@ -9,7 +12,7 @@ func SampleRequest(c *gin.Context) {
 	})
 }
 
-func GetProductBySku(c *gin.Context){
-	sku:=c.Query("sku")
-	products :=
+func GetProductBySku(c *gin.Context) {
+	sku := c.Query("sku")
+	products := database.GetProductSku(sku)
 }
