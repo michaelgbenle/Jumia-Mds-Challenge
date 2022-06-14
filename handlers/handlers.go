@@ -19,3 +19,6 @@ func GetProductBySku(c *gin.Context) {
 		"product": product,
 	})
 }
+func ConsumeStock() {
+
+}
