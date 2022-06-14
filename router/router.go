@@ -16,6 +16,4 @@ func SetupRouter() *gin.Engine {
 	})
 
 	return router
-
 }
-
