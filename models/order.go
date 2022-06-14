@@ -8,5 +8,5 @@ type order struct {
 	gorm.Model
 	ProductId uint
 	Amount    uint
-	Product   product
+	Product   Product
 }
