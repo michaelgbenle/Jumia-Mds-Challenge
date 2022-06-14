@@ -5,9 +5,9 @@ import (
 	"math"
 )
 
-func GetProductSku(sku string) models.Product {
+func GetProductSku(sku, country string) models.Product {
 	product := models.Product{}
-	Db.Where("sku= ?", sku).First(product)
+	Db.Where("sku= ? AND country=?", sku, country).First(product)
 	return product
 }
 
