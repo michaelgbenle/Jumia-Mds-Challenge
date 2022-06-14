@@ -1,5 +1,10 @@
 package handlers
 
-func SampleRequest() {
+import "github.com/gin-gonic/gin"
 
+func SampleRequest(c *gin.Context) {
+
+	c.JSON(200, gin.H{
+		"ping": "pong",
+	})
 }
