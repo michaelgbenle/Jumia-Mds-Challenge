@@ -16,7 +16,7 @@ func main() {
 	}
 	jumia := router.SetupRouter()
 	port := os.Getenv("PORT")
-	fmt.Println("hello")
+
 	err = jumia.Run(":" + port)
 	if err != nil {
 		log.Println(err)
