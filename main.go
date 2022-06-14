@@ -12,6 +12,7 @@ func main() {
 	if err != nil {
 		return
 	}
+
 	jumia := router.SetupRouter()
 	port := os.Getenv("PORT")
 
