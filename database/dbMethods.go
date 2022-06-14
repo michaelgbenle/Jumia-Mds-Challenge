@@ -13,7 +13,8 @@ func GetProductSku(sku, country string) models.Product {
 
 func SellStock(product models.Product) models.Order {
 	initialStock := int(math.Abs(float64(product.Stock)))
-	Db.First(product, "sku=?", product.Sku)
+
+	Db.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku)
 
 	order := models.Order{
 		ProductId: product.ID,
