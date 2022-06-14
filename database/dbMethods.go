@@ -31,6 +31,7 @@ func SellStock(product *models.Product) models.Order {
 	Db.Create(&order)
 
 	//Update product amount to reflect change
+	Db.Model(models.Product{}).Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock - initialStock})
 
 	return order
 }
