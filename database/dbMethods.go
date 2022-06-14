@@ -21,5 +21,9 @@ func SellStock(product models.Product) models.Order {
 		Amount:    uint(initialStock),
 	}
 
+	if product.ID <= 0 {
+
+	}
+
 	return order
 }
