@@ -43,6 +43,6 @@ func BulkUpload(products *[]models.Product) {
 	dbconnections := make(chan int, 90)
 	for _, product := range *products {
 		wg.Add(1)
-		dbconnections
+		dbconnections <- 1
 	}
 }
