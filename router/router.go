@@ -2,16 +2,11 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"os"
 )
 
-func SetupRouter(port string, db *gorm.DB) {
+func SetupRouter() *gin.Engine {
 	router := gin.Default()
-
-	router.Use(func(c *gin.Context) {
-		c.Set("db", db)
-	})
 
 	apirouter := router.Group("/api/v1")
 
@@ -26,5 +21,5 @@ func SetupRouter(port string, db *gorm.DB) {
 	if port == ":" {
 		port = ":8081"
 	}
-	return router, port
+	return router
 }

@@ -3,11 +3,16 @@ package main
 import (
 	"fmt"
 	"github.com/michaelgbenle/jumiaMds/router"
-	"gorm.io/gorm"
+	"log"
 )
 
 func main() {
-	var db *gorm.DB
+
 	fmt.Println("starting jumia app")
-	jumia := router.SetupRouter(":2022", db)
+	jumia := router.SetupRouter()
+	err := jumia.Run(":2022")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
