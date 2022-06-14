@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Product struct {
 	gorm.Model
-	Country string `json:"name"`
+	Country string `json:"country"`
 	Sku     string `json:"sku"`
 	Name    string `json:"name"`
 	Stock   uint   `json:"stock"`
