@@ -60,5 +60,10 @@ func SwitchSellBuy(product *models.Product) {
 	}
 }
 func ProductCreate(product *models.Product) *models.Product {
+	changeInStock := product.Stock
+	trans := Db.Begin()
+	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
 
+	if product.ID == 0 {
+	}
 }
