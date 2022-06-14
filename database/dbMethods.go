@@ -35,3 +35,7 @@ func SellStock(product *models.Product) models.Order {
 
 	return order
 }
+
+func bulkUpload() {
+
+}
