@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/michaelgbenle/jumiaMds/router"
 	"log"
@@ -9,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println("hello111")
+
 	err := godotenv.Load(".env")
 	if err != nil {
 		return
