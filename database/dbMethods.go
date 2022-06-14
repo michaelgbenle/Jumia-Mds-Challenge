@@ -2,6 +2,7 @@ package database
 
 import (
 	"github.com/michaelgbenle/jumiaMds/models"
+	"log"
 	"math"
 )
 
@@ -22,6 +23,7 @@ func SellStock(product *models.Product) models.Order {
 	}
 
 	if product.ID <= 0 {
+		log.Println("Product Not Available")
 		return order
 	}
 
