@@ -17,5 +17,6 @@ func consumeStock(product models.Product) models.Order {
 
 	order := models.Order{
 		ProductId: product.ID,
+		Amount:    uint(initialStock),
 	}
 }
