@@ -2,11 +2,13 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/michaelgbenle/jumiaMds/database"
 	"github.com/michaelgbenle/jumiaMds/handlers"
 )
 
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
+	err := database.SetupDb()
 
 	apirouter := router.Group("/api/v1")
 
