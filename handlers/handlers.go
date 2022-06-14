@@ -17,7 +17,7 @@ func GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	product := database.GetProductSku(sku)
 	c.JSON(http.StatusOK, gin.H{
-		"product": product,
+		"message": product,
 	})
 }
 
