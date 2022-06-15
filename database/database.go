@@ -11,7 +11,7 @@ import (
 
 var Db *gorm.DB
 
-func SetupDb() error {
+func SetupDb() {
 
 	host := os.Getenv("DB_HOST")
 	user := os.Getenv("DB_USER")
@@ -30,5 +30,5 @@ func SetupDb() error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return nil
+
 }
