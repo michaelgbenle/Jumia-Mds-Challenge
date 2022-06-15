@@ -28,9 +28,15 @@ func (pdb *PostgresDb) SetupDb() error {
 	}
 	pdb.DB = db
 
-	err = Db.AutoMigrate(models.Product{}, models.Order{})
+	err = pdb.DB.AutoMigrate(models.Product{}, models.Order{})
 	if err != nil {
 		log.Fatal(err)
 	}
 	return nil
+}
+
+func (pdb *PostgresDb) GetProductSku(sku, country string) models.Product {
+	product := models.Product{}
+	pdb.DB.Where("sku= ? AND country=?", sku, country).First(product)
+	return product
 }

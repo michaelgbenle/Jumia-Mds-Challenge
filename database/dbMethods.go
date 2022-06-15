@@ -11,12 +11,6 @@ import (
 
 var wg sync.WaitGroup
 
-func GetProductSku(sku, country string) models.Product {
-	product := models.Product{}
-	Db.Where("sku= ? AND country=?", sku, country).First(product)
-	return product
-}
-
 func SellStock(product *models.Product) models.Order {
 	purchaseStock := int(math.Abs(float64(product.Stock)))
 
