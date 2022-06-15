@@ -4,6 +4,7 @@ import (
 	"github.com/michaelgbenle/jumiaMds/models"
 	"log"
 	"math"
+	"strconv"
 	"strings"
 	"sync"
 )
@@ -97,6 +98,6 @@ func BulkUpload(file [][]string) {
 			log.Println("incomplete data")
 			continue
 		}
-
+		stock, err := strconv.Atoi(resultArray[3])
 	}
 }
