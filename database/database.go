@@ -45,7 +45,7 @@ func (pdb *PostgresDb) GetProductSku(sku, country string) models.Product {
 func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
 	purchaseStock := int(math.Abs(float64(product.Stock)))
 
-	pdb.Db.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock)
+	pdb.DB.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock)
 
 	order := models.Order{
 		ProductId: product.ID,
@@ -58,7 +58,7 @@ func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
 	}
 
 	//create the order
-	Db.Create(&order)
+	pdb.DB.Create(&order)
 
 	//Update product amount to reflect change
 	Db.Model(models.Product{}).Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock - purchaseStock})
