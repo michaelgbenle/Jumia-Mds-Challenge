@@ -51,7 +51,7 @@ func BulkUpdateFromCsv(c *gin.Context) {
 		})
 	}
 	defer buf.Close()
-	reader := csv.NewReader()
+	reader := csv.NewReader(buf)
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
