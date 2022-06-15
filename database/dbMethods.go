@@ -49,9 +49,7 @@ func BulkUploads(products *[]models.Product) {
 		go func(product models.Product) {
 			SwitchSellBuy(&product)
 			wg.Done()
-			<-dbconnections
-		}(product)
-	}
+
 }
 
 func SwitchSellBuy(product *models.Product) {
