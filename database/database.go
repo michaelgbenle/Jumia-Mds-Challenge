@@ -12,7 +12,6 @@ import (
 var Db *gorm.DB
 
 func SetupDb() {
-
 	host := os.Getenv("DB_HOST")
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
