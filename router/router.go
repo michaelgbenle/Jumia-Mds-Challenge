@@ -11,7 +11,7 @@ func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	err := database.SetupDb()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	apirouter := router.Group("/api/v1")
