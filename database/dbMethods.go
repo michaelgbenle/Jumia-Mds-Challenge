@@ -18,13 +18,13 @@ func GetProductSku(sku, country string) models.Product {
 }
 
 func SellStock(product *models.Product) models.Order {
-	initialStock := int(math.Abs(float64(product.Stock)))
+	purchaseStock := int(math.Abs(float64(product.Stock)))
 
-	Db.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, initialStock)
+	Db.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock)
 
 	order := models.Order{
 		ProductId: product.ID,
-		Quantity:  uint(initialStock),
+		Quantity:  uint(purchaseStock),
 	}
 
 	if product.ID <= 0 {
@@ -36,7 +36,7 @@ func SellStock(product *models.Product) models.Order {
 	Db.Create(&order)
 
 	//Update product amount to reflect change
-	Db.Model(models.Product{}).Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock - initialStock})
+	Db.Model(models.Product{}).Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock - purchaseStock})
 
 	return order
 }
