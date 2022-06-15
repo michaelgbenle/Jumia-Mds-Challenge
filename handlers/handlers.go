@@ -43,7 +43,7 @@ func BulkUpdateFromCsv(c *gin.Context) {
 			"error": "file upload error",
 		})
 	}
-	buf, err := csv.Open()
+	buf, err := csvFile.Open()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "file error",
