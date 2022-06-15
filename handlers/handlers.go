@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"encoding/csv"
 	"github.com/gin-gonic/gin"
 	"github.com/michaelgbenle/jumiaMds/database"
 	"github.com/michaelgbenle/jumiaMds/models"
@@ -50,6 +51,7 @@ func BulkUpdateFromCsv(c *gin.Context) {
 		})
 	}
 	defer buf.Close()
+	reader := csv.NewReader()
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
