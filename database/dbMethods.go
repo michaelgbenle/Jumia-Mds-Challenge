@@ -80,4 +80,5 @@ func ProductCreate(product *models.Product) *models.Product {
 	}
 	product.Stock += changeInStock
 	trans.Commit()
+	return product
 }
