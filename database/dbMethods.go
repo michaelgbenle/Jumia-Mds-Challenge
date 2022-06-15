@@ -45,9 +45,6 @@ func SellStock(product *models.Product) models.Order {
 //	dbconnections := make(chan int, 90)
 //	for _, product := range *products {
 //		wg.Add(1)
-//		dbconnections <- 1
-//		go func(product models.Product) {
-//			SwitchSellBuy(&product)
 
 //}
 
