@@ -67,6 +67,7 @@ func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "file error",
 		})
+		return
 	}
 	defer buf.Close()
 
@@ -84,7 +85,7 @@ func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 		})
 		return
 	}
-
+	log.Println("love")
 	h.DB.BulkUpload(csvLines)
 
 	c.JSON(http.StatusOK, gin.H{
