@@ -41,8 +41,6 @@ func SellStock(product *models.Product) models.Order {
 	return order
 }
 
-//func BulkUploads(products *[]models.Product) {
-
 //}
 
 func SwitchSellBuy(product *models.Product) {
