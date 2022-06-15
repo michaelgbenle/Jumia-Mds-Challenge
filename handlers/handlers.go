@@ -9,6 +9,10 @@ import (
 	"net/http"
 )
 
+type Handler struct {
+	DB database.DB
+}
+
 func GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")

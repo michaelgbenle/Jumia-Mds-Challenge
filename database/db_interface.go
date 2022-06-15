@@ -7,4 +7,5 @@ type DB interface {
 	SellStock(product *models.Product) models.Order
 	SellOrCreate(product *models.Product)
 	ProductCreate(product *models.Product) *models.Product
+	BulkUpload(file [][]string)
 }
