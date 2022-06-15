@@ -84,4 +84,7 @@ func ProductCreate(product *models.Product) *models.Product {
 	return product
 }
 
-func BulkUpload(file [][]string) {}
+func BulkUpload(file [][]string) {
+	dbconn_guard := make(chan int, 90)
+
+}
