@@ -67,7 +67,7 @@ func (h *Handler) BulkUploadFromCsv(c *gin.Context) {
 		})
 	}
 
-	database.BulkUpload(csvLines)
+	BulkUpload(csvLines)
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
