@@ -44,6 +44,7 @@ func (h *handler) ConsumeStock(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "error binding json",
 		})
+		return
 	}
 	stockSold := h.DB.SellStock(&product)
 	c.JSON(http.StatusOK, gin.H{
