@@ -39,11 +39,13 @@ func ConsumeStock(c *gin.Context) {
 
 func BulkUploadFromCsv(c *gin.Context) {
 	csvFile, err := c.FormFile("file_1")
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "file upload error",
 		})
 	}
+
 	buf, err := csvFile.Open()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -51,11 +53,17 @@ func BulkUploadFromCsv(c *gin.Context) {
 		})
 	}
 	defer buf.Close()
+
 	reader := csv.NewReader(buf)
+
 	reader.Comma = ','
+
 	reader.LazyQuotes = true
+
 	csvLines, _ := reader.ReadAll()
+
 	database.BulkUpload(csvLines)
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
 	})
