@@ -9,11 +9,15 @@ import (
 	"net/http"
 )
 
-type Handler struct {
+type handler struct {
 	DB database.DB
 }
 
-func (h *Handler) GetProductBySku(c *gin.Context) {
+func HandleConstruct() *handler {
+	return &handler{}
+}
+
+func (h *handler) GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")
 	product := h.DB.GetProductSku(sku, country)
@@ -22,7 +26,7 @@ func (h *Handler) GetProductBySku(c *gin.Context) {
 	})
 }
 
-func (h *Handler) ConsumeStock(c *gin.Context) {
+func (h *handler) ConsumeStock(c *gin.Context) {
 	product := models.Product{}
 	err := c.ShouldBindJSON(product)
 	if err != nil {
@@ -36,7 +40,7 @@ func (h *Handler) ConsumeStock(c *gin.Context) {
 	})
 }
 
-func (h *Handler) BulkUploadFromCsv(c *gin.Context) {
+func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 	csvFile, err := c.FormFile("data")
 
 	if err != nil {

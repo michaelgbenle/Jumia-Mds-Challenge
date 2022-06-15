@@ -7,17 +7,19 @@ import (
 	"log"
 )
 
-func SetupRouter(h *handlers.Handler) *gin.Engine {
+func SetupRouter() *gin.Engine {
+	handler := handlers.HandleConstruct()
 	router := gin.Default()
-	err := database.SetupDb()
+	PDB := new(database.PostgresDb)
+	err := PDB.SetupDb()
 	if err != nil {
 		log.Println(err)
 	}
 
 	apirouter := router.Group("/api/v1")
-	apirouter.GET("/product", h.GetProductBySku)
-	apirouter.POST("/product/consume", h.ConsumeStock)
-	apirouter.POST("/product/bulkupdate", h.BulkUploadFromCsv)
+	apirouter.GET("/product", handler.GetProductBySku)
+	apirouter.POST("/product/consume", handler.ConsumeStock)
+	apirouter.POST("/product/bulkupdate", handler.BulkUploadFromCsv)
 
 	return router
 }
