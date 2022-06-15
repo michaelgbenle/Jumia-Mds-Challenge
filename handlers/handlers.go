@@ -67,7 +67,7 @@ func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 			"error": "file error",
 		})
 	}
-	defer buf.Close() //needs review
+	defer buf.Close()
 
 	reader := csv.NewReader(buf)
 
