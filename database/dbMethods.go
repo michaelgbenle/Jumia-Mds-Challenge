@@ -44,7 +44,6 @@ func SellStock(product *models.Product) models.Order {
 //func BulkUploads(products *[]models.Product) {
 //	dbconnections := make(chan int, 90)
 //	for _, product := range *products {
-//		wg.Add(1)
 
 //}
 
