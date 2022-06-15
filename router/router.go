@@ -19,7 +19,7 @@ func SetupRouter() *gin.Engine {
 	apirouter.GET("/", handlers.SampleRequest)
 	apirouter.GET("/product", handlers.GetProductBySku)
 	apirouter.GET("/product/consume", handlers.ConsumeStock)
-	apirouter.POST("/product/bulkupdate", handlers.BulkUpdateFromCsv)
+	apirouter.POST("/product/bulkupdate", handlers.BulkUploadFromCsv)
 
 	return router
 }
