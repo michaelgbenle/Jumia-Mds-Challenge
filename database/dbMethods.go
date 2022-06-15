@@ -109,5 +109,6 @@ func BulkUpload(file [][]string) {
 			Name:    resultArray[2],
 			Stock:   stock,
 		}
+		wg.Add(1)
 	}
 }
