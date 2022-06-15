@@ -78,4 +78,6 @@ func ProductCreate(product *models.Product) *models.Product {
 		trans.Rollback()
 		return product
 	}
+	product.Stock += changeInStock
+	trans.Commit()
 }
