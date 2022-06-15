@@ -37,7 +37,7 @@ func ConsumeStock(c *gin.Context) {
 }
 
 func BulkUpdateFromCsv(c *gin.Context) {
-
+	file, err := c.FormFile()
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
 	})
