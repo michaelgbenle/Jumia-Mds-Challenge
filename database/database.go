@@ -10,6 +10,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 //PostgresDb implements the DB interface
@@ -101,6 +102,7 @@ func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
 }
 
 func BulkUpload(file [][]string) {
+	var wg sync.WaitGroup
 	dbChan := make(chan int, 90)
 	for i, fileLine := range file {
 		if i == 0 {
