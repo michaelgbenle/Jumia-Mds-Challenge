@@ -24,7 +24,7 @@ func SellStock(product *models.Product) models.Order {
 
 	order := models.Order{
 		ProductId: product.ID,
-		Amount:    uint(initialStock),
+		Quantity:  uint(initialStock),
 	}
 
 	if product.ID <= 0 {
@@ -40,8 +40,6 @@ func SellStock(product *models.Product) models.Order {
 
 	return order
 }
-
-//}
 
 func SwitchSellBuy(product *models.Product) {
 	if int(product.Stock) < 0 {
