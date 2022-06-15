@@ -48,10 +48,7 @@ func SellStock(product *models.Product) models.Order {
 //		dbconnections <- 1
 //		go func(product models.Product) {
 //			SwitchSellBuy(&product)
-//			wg.Done()
-//			<-dbconnections
-//		}(product)
-//	}
+
 //}
 
 func SwitchSellBuy(product *models.Product) {
