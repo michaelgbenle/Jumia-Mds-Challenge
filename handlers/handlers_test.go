@@ -2,4 +2,4 @@ package handlers
 
 import "testing"
 
-func TestAllSellerOrders(t *testing.T) {
+func TestAllSellerOrders(t *testing.T) {}
