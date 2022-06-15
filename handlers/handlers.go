@@ -44,6 +44,11 @@ func BulkUpdateFromCsv(c *gin.Context) {
 		})
 	}
 	buf, err := csv.Open()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "file error",
+		})
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
