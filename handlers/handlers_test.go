@@ -2,4 +2,6 @@ package handlers
 
 import "testing"
 
-func TestAllSellerOrders(t *testing.T) {}
+func TestGetProductBySku(t *testing.T) {
+
+}
