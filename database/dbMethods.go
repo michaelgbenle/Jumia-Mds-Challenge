@@ -41,7 +41,7 @@ func SellStock(product *models.Product) models.Order {
 	return order
 }
 
-func SwitchSellBuy(product *models.Product) {
+func sellOrCreate(product *models.Product) {
 	if int(product.Stock) < 0 {
 		SellStock(product)
 	} else {
@@ -99,7 +99,7 @@ func BulkUpload(file [][]string) {
 		wg.Add(1)
 		dbChan <- 1
 		go func(product models.Product) {
-			SwitchSellBuy(&product)
+			sellOrCreate(&product)
 			wg.Done()
 			<-dbChan
 
