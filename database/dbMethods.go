@@ -65,5 +65,10 @@ func ProductCreate(product *models.Product) *models.Product {
 	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
 
 	if product.ID == 0 {
+		if err := trans.Create(product).Error; err != nil {
+			trans.Rollback()
+			return product
+		}
+		trans.Commit()
 	}
 }
