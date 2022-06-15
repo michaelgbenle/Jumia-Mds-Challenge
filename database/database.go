@@ -73,3 +73,27 @@ func (pdb *PostgresDb) sellOrCreate(product *models.Product) {
 		ProductCreate(product)
 	}
 }
+
+func ProductCreate(product *models.Product) *models.Product {
+	changeInStock := product.Stock
+	trans := Db.Begin()
+	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
+
+	if product.ID == 0 {
+		if err := trans.Create(product).Error; err != nil {
+			trans.Rollback()
+			return product
+		}
+		trans.Commit()
+		return product
+	}
+	//update product to reflect change
+	if err := trans.Model(models.Product{}).
+		Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock + changeInStock}).Error; err != nil {
+		trans.Rollback()
+		return product
+	}
+	product.Stock += changeInStock
+	trans.Commit()
+	return product
+}
