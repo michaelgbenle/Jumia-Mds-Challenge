@@ -37,7 +37,7 @@ func ConsumeStock(c *gin.Context) {
 }
 
 func BulkUpdateFromCsv(c *gin.Context) {
-	csv, err := c.FormFile("file_1")
+	csvFile, err := c.FormFile("file_1")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "file upload error",
