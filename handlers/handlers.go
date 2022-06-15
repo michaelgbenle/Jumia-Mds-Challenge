@@ -13,14 +13,25 @@ type handler struct {
 	DB database.DB
 }
 
-func HandleConstruct() *handler {
-	return &handler{}
+func HandleConstruct() handler {
+	Db := database.NewPostgresDb()
+	err := Db.SetupDb()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return handler{DB: Db}
 }
 
 func (h handler) GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")
-	product := h.DB.GetProductSku(sku, country)
+	product, err := h.DB.GetProductSku(sku, country)
+	if err != nil {
+		log.Println(err)
+		c.JSON(400, gin.H{
+			"error": "something went wrong",
+		})
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": product,
 	})

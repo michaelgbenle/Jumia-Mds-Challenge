@@ -18,6 +18,10 @@ type PostgresDb struct {
 	DB *gorm.DB
 }
 
+func NewPostgresDb() *PostgresDb {
+	return &PostgresDb{}
+}
+
 func (pdb *PostgresDb) SetupDb() error {
 	host := os.Getenv("DB_HOST")
 	user := os.Getenv("DB_USER")
@@ -39,10 +43,11 @@ func (pdb *PostgresDb) SetupDb() error {
 	return nil
 }
 
-func (pdb *PostgresDb) GetProductSku(sku, country string) *models.Product {
+func (pdb *PostgresDb) GetProductSku(sku, country string) (*models.Product, error) {
 	product := models.Product{}
-	pdb.DB.Where("sku= ? AND country=?", sku, country).First(product)
-	return &product
+	err := pdb.DB.Where("sku= ? AND country=?", sku, country).First(&product).Error
+	log.Println(err)
+	return &product, err
 }
 
 func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
