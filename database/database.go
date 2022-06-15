@@ -30,5 +30,4 @@ func SetupDb() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
