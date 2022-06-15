@@ -103,5 +103,6 @@ func BulkUpload(file [][]string) {
 			log.Println("incorrect value")
 			continue
 		}
+		product := &models.Product{}
 	}
 }
