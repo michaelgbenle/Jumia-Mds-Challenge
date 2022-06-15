@@ -36,7 +36,7 @@ func (h *Handler) ConsumeStock(c *gin.Context) {
 	})
 }
 
-func BulkUploadFromCsv(c *gin.Context) {
+func (h *Handler) BulkUploadFromCsv(c *gin.Context) {
 	csvFile, err := c.FormFile("data")
 
 	if err != nil {
