@@ -112,7 +112,9 @@ func BulkUpload(file [][]string) {
 		wg.Add(1)
 		dbChan <- 1
 		go func(product models.Product) *models.Order {
-
+			SwitchSellBuy(&product)
+			wg.Done()
+			<-dbChan
 		}(*product)
 	}
 }
