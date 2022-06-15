@@ -75,6 +75,7 @@ func ProductCreate(product *models.Product) *models.Product {
 	//update product to reflect change
 	if err := trans.Model(models.Product{}).
 		Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock + changeInStock}).Error; err != nil {
-
+		trans.Rollback()
+		return product
 	}
 }
