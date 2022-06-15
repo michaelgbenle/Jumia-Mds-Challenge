@@ -99,5 +99,8 @@ func BulkUpload(file [][]string) {
 			continue
 		}
 		stock, err := strconv.Atoi(resultArray[3])
+		if err != nil {
+			log.Println("incorrect value")
+		}
 	}
 }
