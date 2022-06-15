@@ -70,5 +70,6 @@ func ProductCreate(product *models.Product) *models.Product {
 			return product
 		}
 		trans.Commit()
+		return product
 	}
 }
