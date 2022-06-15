@@ -82,6 +82,7 @@ func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "internal server error",
 		})
+		return
 	}
 
 	h.DB.BulkUpload(csvLines)
