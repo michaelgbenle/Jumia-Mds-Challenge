@@ -92,5 +92,7 @@ func BulkUpload(file [][]string) {
 			continue
 		}
 		result := strings.ReplaceAll(fileLine[0], `","`, "!")
+		resultArray := strings.Split(result, "!")
+
 	}
 }
