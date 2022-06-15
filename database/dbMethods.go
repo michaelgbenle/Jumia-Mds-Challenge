@@ -59,6 +59,7 @@ func SwitchSellBuy(product *models.Product) {
 		ProductCreate(product)
 	}
 }
+
 func ProductCreate(product *models.Product) *models.Product {
 	changeInStock := product.Stock
 	trans := Db.Begin()
