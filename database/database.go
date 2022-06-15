@@ -76,7 +76,7 @@ func (pdb *PostgresDb) sellOrCreate(product *models.Product) {
 
 func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
 	changeInStock := product.Stock
-	trans := Db.Begin()
+	trans := pdb.DB.Begin()
 	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
 
 	if product.ID == 0 {
