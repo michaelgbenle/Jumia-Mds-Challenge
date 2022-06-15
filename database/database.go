@@ -101,7 +101,7 @@ func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
 	return product
 }
 
-func BulkUpload(file [][]string) {
+func (pdb *PostgresDb) BulkUpload(file [][]string) {
 	var wg sync.WaitGroup
 	dbChan := make(chan int, 90)
 	for i, fileLine := range file {
