@@ -118,4 +118,5 @@ func BulkUpload(file [][]string) {
 
 		}(*product)
 	}
+	//wg.Wait()
 }
