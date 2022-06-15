@@ -73,5 +73,5 @@ func ProductCreate(product *models.Product) *models.Product {
 		return product
 	}
 	//update product to reflect change
-	if err := trans.Model(models.Product{})
+	if err := trans.Model(models.Product{}).Where("id = ?", product.ID).Updates()
 }
