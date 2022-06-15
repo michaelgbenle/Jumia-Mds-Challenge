@@ -65,3 +65,11 @@ func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
 
 	return order
 }
+
+func (pdb *PostgresDb) sellOrCreate(product *models.Product) {
+	if int(product.Stock) < 0 {
+		SellStock(product)
+	} else {
+		ProductCreate(product)
+	}
+}

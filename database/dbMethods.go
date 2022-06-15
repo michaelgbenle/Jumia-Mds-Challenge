@@ -10,14 +10,6 @@ import (
 
 var wg sync.WaitGroup
 
-func sellOrCreate(product *models.Product) {
-	if int(product.Stock) < 0 {
-		SellStock(product)
-	} else {
-		ProductCreate(product)
-	}
-}
-
 func ProductCreate(product *models.Product) *models.Product {
 	changeInStock := product.Stock
 	trans := Db.Begin()
