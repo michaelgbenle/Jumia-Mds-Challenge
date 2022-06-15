@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func SetupRouter() *gin.Engine {
+func SetupRouter(h *handlers.Handler) *gin.Engine {
 	router := gin.Default()
 	err := database.SetupDb()
 	if err != nil {
@@ -15,7 +15,7 @@ func SetupRouter() *gin.Engine {
 	}
 
 	apirouter := router.Group("/api/v1")
-	apirouter.GET("/product", handlers.GetProductBySku)
+	apirouter.GET("/product", h.GetProductBySku)
 	apirouter.POST("/product/consume", handlers.ConsumeStock)
 	apirouter.POST("/product/bulkupdate", handlers.BulkUploadFromCsv)
 
