@@ -72,4 +72,6 @@ func ProductCreate(product *models.Product) *models.Product {
 		trans.Commit()
 		return product
 	}
+	//update product to reflect change
+	if err := trans.Model(models.Product{})
 }
