@@ -68,13 +68,13 @@ func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
 
 func (pdb *PostgresDb) sellOrCreate(product *models.Product) {
 	if int(product.Stock) < 0 {
-		SellStock(product)
+		pdb.SellStock(product)
 	} else {
 		ProductCreate(product)
 	}
 }
 
-func ProductCreate(product *models.Product) *models.Product {
+func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
 	changeInStock := product.Stock
 	trans := Db.Begin()
 	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
