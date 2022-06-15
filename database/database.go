@@ -70,7 +70,7 @@ func (pdb *PostgresDb) sellOrCreate(product *models.Product) {
 	if int(product.Stock) < 0 {
 		pdb.SellStock(product)
 	} else {
-		ProductCreate(product)
+		pdb.ProductCreate(product)
 	}
 }
 
