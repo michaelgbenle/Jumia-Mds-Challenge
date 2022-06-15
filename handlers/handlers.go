@@ -17,7 +17,7 @@ func HandleConstruct() *handler {
 	return &handler{}
 }
 
-func (h *handler) GetProductBySku(c *gin.Context) {
+func (h handler) GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")
 	product := h.DB.GetProductSku(sku, country)
