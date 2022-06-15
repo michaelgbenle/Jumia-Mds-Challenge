@@ -22,7 +22,7 @@ func (h *Handler) GetProductBySku(c *gin.Context) {
 	})
 }
 
-func ConsumeStock(c *gin.Context) {
+func (h *Handler) ConsumeStock(c *gin.Context) {
 	product := models.Product{}
 	err := c.ShouldBindJSON(product)
 	if err != nil {
