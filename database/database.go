@@ -42,10 +42,10 @@ func (pdb *PostgresDb) GetProductSku(sku, country string) models.Product {
 	return product
 }
 
-func SellStock(product *models.Product) models.Order {
+func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
 	purchaseStock := int(math.Abs(float64(product.Stock)))
 
-	Db.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock)
+	pdb.Db.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock)
 
 	order := models.Order{
 		ProductId: product.ID,
