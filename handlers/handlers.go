@@ -39,7 +39,7 @@ func (h handler) GetProductBySku(c *gin.Context) {
 
 func (h *handler) ConsumeStock(c *gin.Context) {
 	product := models.Product{}
-	err := c.ShouldBindJSON(product)
+	err := c.ShouldBindJSON(&product)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "error binding json",
