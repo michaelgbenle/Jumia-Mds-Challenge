@@ -69,7 +69,7 @@ func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
 	return order
 }
 
-func (pdb *PostgresDb) sellOrCreate(product *models.Product) {
+func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
 	if int(product.Stock) < 0 {
 		pdb.SellStock(product)
 	} else {
@@ -128,7 +128,7 @@ func BulkUpload(file [][]string) {
 		wg.Add(1)
 		dbChan <- 1
 		go func(product models.Product) {
-			pdb.sellOrCreate(&product)
+			pdb.SellOrCreate(&product)
 			wg.Done()
 			<-dbChan
 
