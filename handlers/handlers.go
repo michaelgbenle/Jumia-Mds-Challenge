@@ -71,7 +71,7 @@ func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 
 	reader := csv.NewReader(buf)
 
-	//reader.Comma = ','
+	reader.Comma = ','
 
 	reader.LazyQuotes = true
 
