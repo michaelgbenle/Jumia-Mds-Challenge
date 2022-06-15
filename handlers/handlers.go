@@ -8,12 +8,6 @@ import (
 	"net/http"
 )
 
-func SampleRequest(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"ping": "pong",
-	})
-}
-
 func GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")
