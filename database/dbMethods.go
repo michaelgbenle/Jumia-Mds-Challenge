@@ -41,16 +41,18 @@ func SellStock(product *models.Product) models.Order {
 	return order
 }
 
-func BulkUploads(products *[]models.Product) {
-	dbconnections := make(chan int, 90)
-	for _, product := range *products {
-		wg.Add(1)
-		dbconnections <- 1
-		go func(product models.Product) {
-			SwitchSellBuy(&product)
-			wg.Done()
-
-}
+//func BulkUploads(products *[]models.Product) {
+//	dbconnections := make(chan int, 90)
+//	for _, product := range *products {
+//		wg.Add(1)
+//		dbconnections <- 1
+//		go func(product models.Product) {
+//			SwitchSellBuy(&product)
+//			wg.Done()
+//			<-dbconnections
+//		}(product)
+//	}
+//}
 
 func SwitchSellBuy(product *models.Product) {
 	if int(product.Stock) < 0 {
