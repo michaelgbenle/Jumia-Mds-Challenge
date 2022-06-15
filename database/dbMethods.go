@@ -86,5 +86,7 @@ func ProductCreate(product *models.Product) *models.Product {
 
 func BulkUpload(file [][]string) {
 	dbChan := make(chan int, 90)
+	for i, fileLine := range file {
 
+	}
 }
