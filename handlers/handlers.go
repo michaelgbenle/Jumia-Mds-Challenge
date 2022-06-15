@@ -59,6 +59,7 @@ func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "file upload error",
 		})
+		return
 	}
 
 	buf, err := csvFile.Open()
