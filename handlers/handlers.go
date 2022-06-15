@@ -49,9 +49,9 @@ func BulkUpdateFromCsv(c *gin.Context) {
 			"error": "file error",
 		})
 	}
+	defer buf.Close()
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
 	})
-	defer buf.Close()
 }
