@@ -9,9 +9,12 @@ import (
 	"os"
 )
 
-var Db *gorm.DB
+//PostgresDb implements the DB interface
+type PostgresDb struct {
+	DB *gorm.DB
+}
 
-func SetupDb() error {
+func (pdb *PostgresDb) SetupDb() error {
 	host := os.Getenv("DB_HOST")
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
@@ -23,7 +26,7 @@ func SetupDb() error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Db = db
+	pdb.DB = db
 
 	err = Db.AutoMigrate(models.Product{}, models.Order{})
 	if err != nil {
