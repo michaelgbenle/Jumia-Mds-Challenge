@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/michaelgbenle/jumiaMds/database"
 	"github.com/michaelgbenle/jumiaMds/models"
+	"log"
 	"net/http"
 )
 
@@ -51,9 +52,16 @@ func BulkUploadFromCsv(c *gin.Context) {
 	reader := csv.NewReader(buf)
 
 	//reader.Comma = ','
+
 	reader.LazyQuotes = true
 
-	csvLines, _ := reader.ReadAll()
+	csvLines, err := reader.ReadAll()
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "internal server error",
+		})
+	}
 
 	database.BulkUpload(csvLines)
 
