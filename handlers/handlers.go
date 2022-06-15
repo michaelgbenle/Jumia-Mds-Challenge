@@ -46,7 +46,7 @@ func BulkUploadFromCsv(c *gin.Context) {
 			"error": "file error",
 		})
 	}
-	defer buf.Close()
+	defer buf.Close() //needs review
 
 	reader := csv.NewReader(buf)
 
