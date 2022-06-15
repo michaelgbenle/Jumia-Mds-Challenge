@@ -13,10 +13,10 @@ type Handler struct {
 	DB database.DB
 }
 
-func GetProductBySku(c *gin.Context) {
+func (h *Handler) GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")
-	product := database.GetProductSku(sku, country)
+	product := h.DB.GetProductSku(sku, country)
 	c.JSON(http.StatusOK, gin.H{
 		"message": product,
 	})
