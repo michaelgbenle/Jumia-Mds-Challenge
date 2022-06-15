@@ -8,5 +8,5 @@ import (
 func TestGetProductBySku(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	//creates a new mock instance
-	mockDB := mock_database.NewMockDB(ctrl)
+	//mockDB := mock_database.NewMockDB(ctrl)
 }
