@@ -3,37 +3,12 @@ package database
 import (
 	"github.com/michaelgbenle/jumiaMds/models"
 	"log"
-	"math"
 	"strconv"
 	"strings"
 	"sync"
 )
 
 var wg sync.WaitGroup
-
-func SellStock(product *models.Product) models.Order {
-	purchaseStock := int(math.Abs(float64(product.Stock)))
-
-	Db.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock)
-
-	order := models.Order{
-		ProductId: product.ID,
-		Quantity:  uint(purchaseStock),
-	}
-
-	if product.ID <= 0 {
-		log.Println("Product Not Available")
-		return order
-	}
-
-	//create the order
-	Db.Create(&order)
-
-	//Update product amount to reflect change
-	Db.Model(models.Product{}).Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock - purchaseStock})
-
-	return order
-}
 
 func sellOrCreate(product *models.Product) {
 	if int(product.Stock) < 0 {
