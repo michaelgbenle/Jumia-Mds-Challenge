@@ -84,4 +84,4 @@ func ProductCreate(product *models.Product) *models.Product {
 	return product
 }
 
-func BulkUploads(products *[]models.Product) {}
+func BulkUpload(products *[]models.Product) {}
