@@ -113,6 +113,6 @@ func BulkUpload(file [][]string) {
 		dbChan <- 1
 		go func(product models.Product) *models.Order {
 
-		}()
+		}(*product)
 	}
 }
