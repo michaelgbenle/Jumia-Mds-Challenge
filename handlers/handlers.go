@@ -37,14 +37,7 @@ func ConsumeStock(c *gin.Context) {
 }
 
 func BulkUpdate(c *gin.Context) {
-	var bulkUpload []models.Product
-	err := c.ShouldBindJSON(&bulkUpload)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "error binding json",
-		})
-	}
-	database.BulkUpload(&bulkUpload)
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Bulk update successful",
 	})
