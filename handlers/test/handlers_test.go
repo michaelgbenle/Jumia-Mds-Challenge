@@ -38,13 +38,33 @@ func TestGetProductBySku(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
+	product2 := models.Product{
+		Name:    "Samsung Phone",
+		Sku:     "cbf87a9be799",
+		Stock:   2,
+		Country: "ma",
+	}
 
-	mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil)
+	t.Run("Testing for successful request", func(t *testing.T) {
+		mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil)
 
-	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
-	route.ServeHTTP(w, req)
-	assert.Contains(t, w.Body.String(), "ma")
-	assert.Equal(t, w.Code, http.StatusOK)
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
+		route.ServeHTTP(w, req)
+		assert.Contains(t, w.Body.String(), "ma")
+		assert.Equal(t, w.Code, http.StatusOK)
+
+	})
+
+	t.Run("Testing for error", func(t *testing.T) {
+		mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil)
+
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
+		route.ServeHTTP(w, req)
+		assert.Contains(t, w.Body.String(), "ma")
+		assert.Equal(t, w.Code, http.StatusOK)
+
+	})
 
 }
