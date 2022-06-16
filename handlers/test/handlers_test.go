@@ -72,3 +72,44 @@ func TestGetProductBySku(t *testing.T) {
 	//})
 
 }
+
+func TestConsumeStock(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	//creates a new mock instance
+	mockDB := mockdatabase.NewMockDB(ctrl)
+	h := handlers.Handler{DB: mockDB}
+
+	route := router.SetupRouter(h)
+	product := models.Product{
+		Name:    "Samsung Phone",
+		Sku:     "cbf87a9be799",
+		Stock:   22,
+		Country: "ma",
+	}
+	productJSON, err := json.Marshal(product)
+	if err != nil {
+		t.Fail()
+	}
+
+	t.Run("Testing for successful request", func(t *testing.T) {
+		mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil).Times(1)
+
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
+		route.ServeHTTP(w, req)
+		assert.Contains(t, w.Body.String(), "ma")
+		assert.Equal(t, w.Code, http.StatusOK)
+
+	})
+
+	//t.Run("Testing for error", func(t *testing.T) {
+	//	mockDB.EXPECT().GetProductSku("e920c573f128", "gh").Return(&product2, nil).Times(1)
+	//	w := httptest.NewRecorder()
+	//	req, _ := http.NewRequest("GET", "/api/v1/product?sku=&country=ma", strings.NewReader(string(product2JSON)))
+	//	route.ServeHTTP(w, req)
+	//	assert.Contains(t, w.Body.String(), "empty")
+	//	assert.Equal(t, w.Code, 400)
+	//
+	//})
+
+}
