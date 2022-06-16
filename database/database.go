@@ -80,7 +80,10 @@ func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error)
 
 func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
 	if int(product.Stock) < 0 {
-		pdb.SellStock(product)
+		_, err := pdb.SellStock(product)
+		if err != nil {
+			return
+		}
 	} else {
 		pdb.ProductCreate(product)
 	}
