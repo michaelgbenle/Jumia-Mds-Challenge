@@ -24,7 +24,7 @@ func (h *Handler) GetProductBySku(c *gin.Context) {
 	if err != nil {
 		log.Println(err)
 		c.JSON(400, gin.H{
-			"error": "something went wrong",
+			"error": "error fetching data",
 		})
 		return
 	}
