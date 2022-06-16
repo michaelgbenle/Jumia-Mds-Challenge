@@ -52,7 +52,6 @@ func TestGetProductBySku(t *testing.T) {
 
 	t.Run("Testing for successful request", func(t *testing.T) {
 		mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil).Times(1)
-
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest(http.MethodGet, "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
 		route.ServeHTTP(w, req)
@@ -64,7 +63,7 @@ func TestGetProductBySku(t *testing.T) {
 	t.Run("Testing for error", func(t *testing.T) {
 		mockDB.EXPECT().GetProductSku("e920c573f128", "gh").Return(nil, err)
 		w := httptest.NewRecorder()
-		req, _ := http.NewRequest(http.MethodGet, "/api/v1/product", strings.NewReader(string(product2JSON)))
+		req, _ := http.NewRequest(http.MethodGet, "/api/v1/product?", strings.NewReader(string(product2JSON)))
 		route.ServeHTTP(w, req)
 		//assert.Contains(t, w.Body.String(), "empty")
 		assert.Equal(t, w.Code, 400)

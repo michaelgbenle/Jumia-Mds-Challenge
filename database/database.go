@@ -72,17 +72,6 @@ func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error)
 	return &order, nil
 }
 
-func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
-	if int(product.Stock) < 0 {
-		_, err := pdb.SellStock(product)
-		if err != nil {
-			return
-		}
-	} else {
-		pdb.ProductCreate(product)
-	}
-}
-
 func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
 	changeInStock := product.Stock
 	trans := pdb.DB.Begin()
@@ -142,4 +131,14 @@ func (pdb *PostgresDb) BulkUpload(file [][]string) {
 	}
 	//wg.Wait()
 
+}
+func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
+	if int(product.Stock) < 0 {
+		_, err := pdb.SellStock(product)
+		if err != nil {
+			return
+		}
+	} else {
+		pdb.ProductCreate(product)
+	}
 }
