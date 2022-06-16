@@ -39,10 +39,14 @@ func TestGetProductBySku(t *testing.T) {
 		t.Fail()
 	}
 	product2 := models.Product{
-		Name:    "Samsung Phone",
-		Sku:     "cbf87a9be799",
+		Name:    "laptop",
+		Sku:     "e920c573f128",
 		Stock:   2,
-		Country: "ma",
+		Country: "gh",
+	}
+	product2JSON, err := json.Marshal(product2)
+	if err != nil {
+		t.Fail()
 	}
 
 	t.Run("Testing for successful request", func(t *testing.T) {
@@ -57,12 +61,12 @@ func TestGetProductBySku(t *testing.T) {
 	})
 
 	t.Run("Testing for error", func(t *testing.T) {
-		mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil)
+		mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product2, nil)
 
 		w := httptest.NewRecorder()
-		req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
+		req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(product2JSON)))
 		route.ServeHTTP(w, req)
-		assert.Contains(t, w.Body.String(), "ma")
+		assert.NotContains(t, w.Body.String(), "ma")
 		assert.Equal(t, w.Code, http.StatusOK)
 
 	})
