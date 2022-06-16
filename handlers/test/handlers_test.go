@@ -103,7 +103,7 @@ func TestConsumeStock(t *testing.T) {
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest("POST", "/api/v1/product/consume", strings.NewReader(string(productJSON)))
 		route.ServeHTTP(w, req)
-		assert.Contains(t, w.Body.String(), order)
+		assert.Contains(t, w.Body.String(), string(orderJSON))
 		assert.Equal(t, w.Code, http.StatusOK)
 
 	})
