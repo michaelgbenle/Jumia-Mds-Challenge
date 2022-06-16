@@ -40,8 +40,6 @@ func TestGetProductBySku(t *testing.T) {
 		t.Fail()
 	}
 
-	//product2 := models.Product{
-
 	t.Run("Testing for error", func(t *testing.T) {
 		mockDB.EXPECT().GetProductSku(product.Sku, product.Country).Return(nil, errors.New("error exist"))
 		w := httptest.NewRecorder()
