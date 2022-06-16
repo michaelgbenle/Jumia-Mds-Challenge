@@ -61,37 +61,37 @@ func TestGetProductBySku(t *testing.T) {
 
 }
 
-//func TestConsumeStock(t *testing.T) {
-//	ctrl := gomock.NewController(t)
-//	//creates a new mock instance
-//	mockDB := mockdatabase.NewMockDB(ctrl)
-//	h := handlers.Handler{DB: mockDB}
-//
-//	route := router.SetupRouter(h)
-//	product := models.Product{
-//		Name:    "Samsung Phone",
-//		Sku:     "cbf87a9be799",
-//		Stock:   10,
-//		Country: "ma",
-//	}
-//	productJSON, err := json.Marshal(product)
-//	if err != nil {
-//		t.Fail()
-//	}
-//	order := models.Order{
-//		ProductId: 1,
-//		Quantity:  3,
-//	}
-//
-//	t.Run("Testing for successful consume", func(t *testing.T) {
-//		mockDB.EXPECT().SellStock(product).Return(&order, nil).Times(1)
-//
-//		w := httptest.NewRecorder()
-//		req, _ := http.NewRequest("POST", "/api/v1/product/consume", strings.NewReader(string(productJSON)))
-//		route.ServeHTTP(w, req)
-//		assert.Contains(t, w.Body.String(), order)
-//		assert.Equal(t, w.Code, http.StatusOK)
-//
-//	})
-//
-//}
+func TestConsumeStock(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	//creates a new mock instance
+	mockDB := mockdatabase.NewMockDB(ctrl)
+	h := handlers.Handler{DB: mockDB}
+
+	route := router.SetupRouter(h)
+	product := models.Product{
+		Name:    "Samsung Phone",
+		Sku:     "cbf87a9be799",
+		Stock:   10,
+		Country: "ma",
+	}
+	productJSON, err := json.Marshal(product)
+	if err != nil {
+		t.Fail()
+	}
+	order := models.Order{
+		ProductId: 1,
+		Quantity:  3,
+	}
+
+	t.Run("Testing for successful consume", func(t *testing.T) {
+		mockDB.EXPECT().SellStock(product).Return(&order, nil).Times(1)
+
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("POST", "/api/v1/product/consume", strings.NewReader(string(productJSON)))
+		route.ServeHTTP(w, req)
+		assert.Contains(t, w.Body.String(), order)
+		assert.Equal(t, w.Code, http.StatusOK)
+
+	})
+
+}
