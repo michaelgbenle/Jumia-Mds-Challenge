@@ -46,7 +46,12 @@ func (h *handler) ConsumeStock(c *gin.Context) {
 		})
 		return
 	}
-	stockSold := h.DB.SellStock(&product)
+	stockSold, err := h.DB.SellStock(&product)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "unable to consume stock",
+		})
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": stockSold,
 	})
