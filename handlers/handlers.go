@@ -26,6 +26,7 @@ func (h *Handler) GetProductBySku(c *gin.Context) {
 		c.JSON(400, gin.H{
 			"error": "something went wrong",
 		})
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": product,
