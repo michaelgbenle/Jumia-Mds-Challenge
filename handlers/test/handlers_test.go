@@ -41,10 +41,6 @@ func TestGetProductBySku(t *testing.T) {
 	}
 
 	//product2 := models.Product{
-	//	Name:    "laptop",
-	//	Sku:     "e920c573f128",
-	//	Stock:   2,
-	//	Country: "gh",
 
 	t.Run("Testing for error", func(t *testing.T) {
 		mockDB.EXPECT().GetProductSku(product.Sku, product.Country).Return(nil, errors.New("error exist"))
