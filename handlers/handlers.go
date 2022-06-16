@@ -19,7 +19,7 @@ type Handler struct {
 //	if err != nil {
 //		log.Fatal(err)
 //	}
-//	return Handler{DB: Db}
+//	return Handler{DataB: Db}
 //}
 
 func (h *Handler) GetProductBySku(c *gin.Context) {

@@ -5,10 +5,10 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/michaelgbenle/jumiaMds/config"
 	mockdatabase "github.com/michaelgbenle/jumiaMds/database/mocks"
+	"github.com/michaelgbenle/jumiaMds/handlers"
 	"github.com/michaelgbenle/jumiaMds/models"
 	"github.com/michaelgbenle/jumiaMds/router"
 	"github.com/stretchr/testify/assert"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -25,9 +25,9 @@ func TestGetProductBySku(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	//creates a new mock instance
 	mockDB := mockdatabase.NewMockDB(ctrl)
+	h := handlers.Handler{DB: mockDB}
 
-	//h := &handlers.handler{DB: mockDB, Mail: mockMail}
-	route := router.SetupRouter()
+	route := router.SetupRouter(h)
 	product := models.Product{
 		Name:    "Samsung Phone",
 		Sku:     "cbf87a9be799",
@@ -40,7 +40,7 @@ func TestGetProductBySku(t *testing.T) {
 	}
 
 	mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil)
-	log.Println("hey", mockDB)
+	//log.Println("hey", mockDB)
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
 	route.ServeHTTP(w, req)

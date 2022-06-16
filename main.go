@@ -9,8 +9,8 @@ import (
 
 func main() {
 	config.NewConfig(".env")
-
-	jumia := router.SetupRouter()
+	h := router.DataB()
+	jumia := router.SetupRouter(h)
 	port := os.Getenv("PORT")
 
 	err := jumia.Run(":" + port)
