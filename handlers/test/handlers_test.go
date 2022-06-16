@@ -83,6 +83,16 @@ func TestConsumeStock(t *testing.T) {
 		Quantity:  3,
 	}
 
+	t.Run("Testing for error", func(t *testing.T) {
+		mockDB.EXPECT().SellStock(product).Return(nil, errors.New("error exist"))
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest(http.MethodGet, "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
+		route.ServeHTTP(w, req)
+		assert.Contains(t, w.Body.String(), "error fetching data")
+		assert.Equal(t, w.Code, 500)
+
+	})
+
 	t.Run("Testing for successful consume", func(t *testing.T) {
 		mockDB.EXPECT().SellStock(product).Return(&order, nil).Times(1)
 
