@@ -45,11 +45,7 @@ func TestGetProductBySku(t *testing.T) {
 	//	Sku:     "e920c573f128",
 	//	Stock:   2,
 	//	Country: "gh",
-	//}
-	//product2JSON, err := json.Marshal(product2)
-	//if err != nil {
-	//	t.Fail()
-	//}
+
 	t.Run("Testing for error", func(t *testing.T) {
 		mockDB.EXPECT().GetProductSku(product.Sku, product.Country).Return(nil, errors.New("error exist"))
 		w := httptest.NewRecorder()
