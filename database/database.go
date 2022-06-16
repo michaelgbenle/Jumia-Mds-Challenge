@@ -51,20 +51,20 @@ func (pdb *PostgresDb) GetProductSku(sku, country string) (*models.Product, erro
 	return &product, nil
 }
 
-func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
+func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error) {
 	purchaseStock := int(math.Abs(float64(product.Stock)))
 
-	pdb.DB.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock)
-
+	err:= pdb.DB.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock).Error\
+	if product.ID <= 0 {
+		//log.Println("Product Not Available")
+		return nil, err
+	}
 	order := models.Order{
 		ProductId: product.ID,
 		Quantity:  uint(purchaseStock),
 	}
 
-	if product.ID <= 0 {
-		log.Println("Product Not Available")
-		return order
-	}
+
 
 	//create the order
 	pdb.DB.Create(&order)
@@ -72,7 +72,7 @@ func (pdb *PostgresDb) SellStock(product *models.Product) models.Order {
 	//Update product amount to reflect change
 	pdb.DB.Model(models.Product{}).Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock - purchaseStock})
 
-	return order
+	return &order, nil
 }
 
 func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
