@@ -13,15 +13,6 @@ type Handler struct {
 	DB database.DB
 }
 
-//func HandleConstruct() Handler {
-//	Db := database.NewPostgresDb()
-//	err := Db.SetupDb()
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//	return Handler{DataB: Db}
-//}
-
 func (h *Handler) GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")
