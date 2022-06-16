@@ -73,19 +73,20 @@ func (h *handler) BulkUploadFromCsv(c *gin.Context) {
 
 	reader := csv.NewReader(buf)
 
-	reader.Comma = ','
+	reader.Comma = '.'
 
 	reader.LazyQuotes = true
 
 	csvLines, err := reader.ReadAll()
 	if err != nil {
 		log.Println(err)
+		log.Println("love2")
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "internal server error",
 		})
 		return
 	}
-	log.Println("love")
+
 	h.DB.BulkUpload(csvLines)
 
 	c.JSON(http.StatusOK, gin.H{

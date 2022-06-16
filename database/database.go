@@ -116,7 +116,7 @@ func (pdb *PostgresDb) BulkUpload(file [][]string) {
 		result := strings.ReplaceAll(fileLine[0], `","`, "!")
 		resultArray := strings.Split(result, "!")
 		if len(resultArray) != 4 {
-			log.Println("incomplete data")
+			log.Println("incomplete data", i)
 			continue
 		}
 		stock, err := strconv.Atoi(resultArray[3])
