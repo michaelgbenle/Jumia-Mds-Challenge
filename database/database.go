@@ -148,5 +148,4 @@ func (pdb *PostgresDb) BulkUpload(file [][]string) {
 	}
 	//wg.Wait()
 
-	return nil
 }
