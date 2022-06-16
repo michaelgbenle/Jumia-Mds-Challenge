@@ -1,12 +1,14 @@
 package test
 
 import (
+	"encoding/json"
 	"github.com/golang/mock/gomock"
 	"github.com/michaelgbenle/jumiaMds/config"
 	mockdatabase "github.com/michaelgbenle/jumiaMds/database/mocks"
 	"github.com/michaelgbenle/jumiaMds/models"
 	"github.com/michaelgbenle/jumiaMds/router"
 	"github.com/stretchr/testify/assert"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -23,18 +25,26 @@ func TestGetProductBySku(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	//creates a new mock instance
 	mockDB := mockdatabase.NewMockDB(ctrl)
+
+	//h := &handlers.handler{DB: mockDB, Mail: mockMail}
 	route := router.SetupRouter()
 	product := models.Product{
 		Name:    "Samsung Phone",
-		Sku:     "UYUT-879847564793-PO",
+		Sku:     "cbf87a9be799",
 		Stock:   2,
-		Country: "ke",
+		Country: "ma",
 	}
-	mockDB.EXPECT().GetProductSku(product.Sku, product.Country).Return(product, nil)
+	productJSON, err := json.Marshal(product)
+	if err != nil {
+		t.Fail()
+	}
+
+	mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil)
+	log.Println("hey", mockDB)
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "api/v1/product", strings.NewReader(""))
+	req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
 	route.ServeHTTP(w, req)
-	assert.Contains(t, w.Body.String(), product)
+	assert.Contains(t, w.Body.String(), "ma")
 	assert.Equal(t, w.Code, http.StatusOK)
 
 }

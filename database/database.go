@@ -7,7 +7,6 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"math"
-	"os"
 	"strconv"
 	"strings"
 	"sync"
@@ -22,12 +21,7 @@ func NewPostgresDb() *PostgresDb {
 	return &PostgresDb{}
 }
 
-func (pdb *PostgresDb) SetupDb() error {
-	host := os.Getenv("DB_HOST")
-	user := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
-	port := os.Getenv("DB_PORT")
+func (pdb *PostgresDb) SetupDb(host, user, password, dbName, port string) error {
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Africa/Lagos", host, user, password, dbName, port)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -68,13 +62,13 @@ func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error)
 	if err = pdb.DB.Create(&order).Error; err != nil {
 		return nil, err
 	}
-
+	fmt.Println("love")
 	//Update product amount to reflect change
 	if err = pdb.DB.Model(models.Product{}).Where("id = ?", product.ID).
 		Updates(models.Product{Stock: product.Stock - purchaseStock}).Error; err != nil {
 		return nil, err
 	}
-
+	fmt.Println("not working")
 	return &order, nil
 }
 
