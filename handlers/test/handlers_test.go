@@ -1,22 +1,22 @@
-package handlers
+package test
 
 import (
 	"github.com/golang/mock/gomock"
+	mockdatabase "github.com/michaelgbenle/jumiaMds/database/mocks"
 	"github.com/michaelgbenle/jumiaMds/models"
 	"github.com/michaelgbenle/jumiaMds/router"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"strings"
-
-	mock_database "github.com/michaelgbenle/jumiaMds/database/mocks"
 	"testing"
 )
 
 func TestGetProductBySku(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	//creates a new mock instance
-	mockDB := mock_database.NewMockDB(ctrl)
+	mockDB := mockdatabase.NewMockDB(ctrl)
+	//h := handlers.HandleConstruct()
 	route := router.SetupRouter()
 	product := models.Product{
 		Name:    "Samsung Phone",
