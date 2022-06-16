@@ -19,6 +19,7 @@ func DataB() handlers.Handler {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return handlers.Handler{DB: Db}
+	handler := handlers.Handler{DB: Db}
+	return handler
 
 }
