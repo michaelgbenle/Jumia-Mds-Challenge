@@ -122,10 +122,10 @@ func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
 	changeInStock := product.Stock
 	trans := pdb.DB.Begin()
 	var dbProduct models.Product
-	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(dbProduct) // needs review
+	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(&dbProduct) // needs review
 
 	if dbProduct.ID == 0 {
-		if err := trans.Create(dbProduct).Error; err != nil {
+		if err := trans.Create(product).Error; err != nil {
 			trans.Rollback()
 			return &dbProduct
 		}
