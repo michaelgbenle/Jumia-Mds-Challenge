@@ -106,9 +106,4 @@ func TestConsumeStock(t *testing.T) {
 
 	})
 
-	//t.Run("Testing for error", func(t *testing.T) {
-	//	mockDB.EXPECT().GetProductSku("e920c573f128", "gh").Return(&product2, nil).Times(1)
-	//	w := httptest.NewRecorder()
-	//	req, _ := http.NewRequest("GET", "/api/v1/product?sku=&country=ma", strings.NewReader(string(product2JSON)))
-
 }
