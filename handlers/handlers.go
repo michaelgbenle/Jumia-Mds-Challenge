@@ -81,7 +81,7 @@ func (h *Handler) BulkUploadFromCsv(c *gin.Context) {
 	csvLines, err := reader.ReadAll()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "internal server error",
+			"error": "error reading file",
 		})
 		return
 	}
