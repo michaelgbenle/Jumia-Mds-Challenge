@@ -46,7 +46,7 @@ func (pdb *PostgresDb) SetupDb() error {
 func (pdb *PostgresDb) GetProductSku(sku, country string) (*models.Product, error) {
 	product := models.Product{}
 	err := pdb.DB.Where("sku= ? AND country=?", sku, country).First(&product).Error
-	log.Println(err)
+
 	return &product, err
 }
 
