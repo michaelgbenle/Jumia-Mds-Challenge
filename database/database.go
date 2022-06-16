@@ -68,7 +68,7 @@ func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error)
 		Updates(models.Product{Stock: product.Stock - purchaseStock}).Error; err != nil {
 		return nil, err
 	}
-	fmt.Println("not working")
+
 	return &order, nil
 }
 
