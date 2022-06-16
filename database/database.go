@@ -67,7 +67,10 @@ func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error)
 
 
 	//create the order
-	pdb.DB.Create(&order)
+	if err = pdb.DB.Create(&order).Error; err != nil {
+		return nil, err
+	}
+
 
 	//Update product amount to reflect change
 	pdb.DB.Model(models.Product{}).Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock - purchaseStock})
