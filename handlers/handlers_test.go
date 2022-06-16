@@ -4,6 +4,10 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/michaelgbenle/jumiaMds/models"
 	"github.com/michaelgbenle/jumiaMds/router"
+	"github.com/stretchr/testify/assert"
+	"net/http"
+	"net/http/httptest"
+	"strings"
 
 	mock_database "github.com/michaelgbenle/jumiaMds/database/mocks"
 	"testing"
@@ -13,9 +17,6 @@ func TestGetProductBySku(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	//creates a new mock instance
 	mockDB := mock_database.NewMockDB(ctrl)
-	h := &handler{
-		DB: mockDB,
-	}
 	route := router.SetupRouter()
 	product := models.Product{
 		Name:    "Samsung Phone",
@@ -23,5 +24,11 @@ func TestGetProductBySku(t *testing.T) {
 		Stock:   2,
 		Country: "ke",
 	}
-	mockDB.GetProductSku(product.Sku, product.Country)
+	mockDB.EXPECT().GetProductSku(product.Sku, product.Country).Return(product, nil)
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "api/v1/product", strings.NewReader(""))
+	route.ServeHTTP(w, req)
+	assert.Contains(t, w.Body.String(), product)
+	assert.Equal(t, w.Code, http.StatusOK)
+
 }
