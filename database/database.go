@@ -121,23 +121,24 @@ func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
 func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
 	changeInStock := product.Stock
 	trans := pdb.DB.Begin()
-	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
+	var dbProduct models.Product
+	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(dbProduct) // needs review
 
-	if product.ID == 0 {
-		if err := trans.Create(product).Error; err != nil {
+	if dbProduct.ID == 0 {
+		if err := trans.Create(dbProduct).Error; err != nil {
 			trans.Rollback()
-			return product
+			return &dbProduct
 		}
 		trans.Commit()
 		return product
 	}
 	//update product to reflect change
 	if err := trans.Model(models.Product{}).
-		Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock + changeInStock}).Error; err != nil {
+		Where("id = ?", dbProduct.ID).Update("stock", changeInStock+dbProduct.Stock).Error; err != nil {
 		trans.Rollback()
-		return product
+		return &models.Product{}
 	}
-	product.Stock += changeInStock
+	//product.Stock += changeInStock
 	trans.Commit()
-	return product
+	return &dbProduct
 }
