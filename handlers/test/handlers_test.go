@@ -40,7 +40,7 @@ func TestGetProductBySku(t *testing.T) {
 	}
 
 	mockDB.EXPECT().GetProductSku("cbf87a9be799", "ma").Return(&product, nil)
-	//log.Println("hey", mockDB)
+
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/api/v1/product?sku=cbf87a9be799&country=ma", strings.NewReader(string(productJSON)))
 	route.ServeHTTP(w, req)
