@@ -50,7 +50,7 @@ func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error)
 
 	err := pdb.DB.First(product, "sku=? AND country = ? AND stock >= ?", product.Sku, product.Country, purchaseStock).Error
 	if product.ID <= 0 {
-		//log.Println("Product Not Available")
+
 		return nil, err
 	}
 	order := models.Order{
