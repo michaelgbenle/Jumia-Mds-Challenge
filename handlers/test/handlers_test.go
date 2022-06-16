@@ -16,7 +16,6 @@ func TestGetProductBySku(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	//creates a new mock instance
 	mockDB := mockdatabase.NewMockDB(ctrl)
-	//h := handlers.HandleConstruct()
 	route := router.SetupRouter()
 	product := models.Product{
 		Name:    "Samsung Phone",
