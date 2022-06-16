@@ -88,7 +88,7 @@ func TestConsumeStock(t *testing.T) {
 	}
 
 	t.Run("Testing for error", func(t *testing.T) {
-		mockDB.EXPECT().SellStock(product).Return(nil, errors.New("error exist"))
+		mockDB.EXPECT().SellStock(&product).Return(nil, errors.New("error exist"))
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest(http.MethodPost, "/api/v1/product/consume", strings.NewReader(string(productJSON)))
 		route.ServeHTTP(w, req)
@@ -98,7 +98,7 @@ func TestConsumeStock(t *testing.T) {
 	})
 
 	t.Run("Testing for successful consume", func(t *testing.T) {
-		mockDB.EXPECT().SellStock(product).Return(&order, nil).Times(1)
+		mockDB.EXPECT().SellStock(&product).Return(&order, nil).Times(1)
 
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest("POST", "/api/v1/product/consume", strings.NewReader(string(productJSON)))
