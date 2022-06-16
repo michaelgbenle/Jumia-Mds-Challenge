@@ -80,8 +80,6 @@ func (h *Handler) BulkUploadFromCsv(c *gin.Context) {
 
 	csvLines, err := reader.ReadAll()
 	if err != nil {
-		log.Println(err)
-		log.Println("love2")
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "internal server error",
 		})
