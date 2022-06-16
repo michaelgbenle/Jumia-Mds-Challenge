@@ -72,30 +72,6 @@ func (pdb *PostgresDb) SellStock(product *models.Product) (*models.Order, error)
 	return &order, nil
 }
 
-func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
-	changeInStock := product.Stock
-	trans := pdb.DB.Begin()
-	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
-
-	if product.ID == 0 {
-		if err := trans.Create(product).Error; err != nil {
-			trans.Rollback()
-			return product
-		}
-		trans.Commit()
-		return product
-	}
-	//update product to reflect change
-	if err := trans.Model(models.Product{}).
-		Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock + changeInStock}).Error; err != nil {
-		trans.Rollback()
-		return product
-	}
-	product.Stock += changeInStock
-	trans.Commit()
-	return product
-}
-
 func (pdb *PostgresDb) BulkUpload(file [][]string) {
 	var wg sync.WaitGroup
 	dbChan := make(chan int, 90)
@@ -141,4 +117,27 @@ func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
 	} else {
 		pdb.ProductCreate(product)
 	}
+}
+func (pdb *PostgresDb) ProductCreate(product *models.Product) *models.Product {
+	changeInStock := product.Stock
+	trans := pdb.DB.Begin()
+	trans.Where("sku =? AND country = ?", product.Sku, product.Country).First(product)
+
+	if product.ID == 0 {
+		if err := trans.Create(product).Error; err != nil {
+			trans.Rollback()
+			return product
+		}
+		trans.Commit()
+		return product
+	}
+	//update product to reflect change
+	if err := trans.Model(models.Product{}).
+		Where("id = ?", product.ID).Updates(models.Product{Stock: product.Stock + changeInStock}).Error; err != nil {
+		trans.Rollback()
+		return product
+	}
+	product.Stock += changeInStock
+	trans.Commit()
+	return product
 }
