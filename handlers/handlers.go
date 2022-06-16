@@ -16,7 +16,7 @@ type Handler struct {
 func (h *Handler) GetProductBySku(c *gin.Context) {
 	sku := c.Query("sku")
 	country := c.Query("country")
-	if len(country) < 1 || len(sku) < 1 {
+	if len(country) <= 0 || len(sku) <= 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "country or sku parameter empty"})
 		return
 	}
