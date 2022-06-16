@@ -2,15 +2,22 @@ package test
 
 import (
 	"github.com/golang/mock/gomock"
+	"github.com/michaelgbenle/jumiaMds/config"
 	mockdatabase "github.com/michaelgbenle/jumiaMds/database/mocks"
 	"github.com/michaelgbenle/jumiaMds/models"
 	"github.com/michaelgbenle/jumiaMds/router"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	config.NewConfig("../../.env")
+	os.Exit(m.Run())
+}
 
 func TestGetProductBySku(t *testing.T) {
 	ctrl := gomock.NewController(t)

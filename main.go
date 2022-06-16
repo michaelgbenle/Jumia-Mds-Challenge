@@ -1,22 +1,19 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
+	"github.com/michaelgbenle/jumiaMds/config"
 	"github.com/michaelgbenle/jumiaMds/router"
 	"log"
 	"os"
 )
 
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		return
-	}
+	config.NewConfig(".env")
 
 	jumia := router.SetupRouter()
 	port := os.Getenv("PORT")
 
-	err = jumia.Run(":" + port)
+	err := jumia.Run(":" + port)
 	if err != nil {
 		log.Fatal(err)
 	}
