@@ -2,6 +2,7 @@ package database
 
 import "github.com/michaelgbenle/jumiaMds/models"
 
+//DB interface implements database methods
 type DB interface {
 	GetProductSku(sku, country string) (*models.Product, error)
 	SellStock(product *models.Product) (*models.Order, error)

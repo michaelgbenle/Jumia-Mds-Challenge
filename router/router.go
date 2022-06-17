@@ -5,7 +5,7 @@ import (
 	"github.com/michaelgbenle/jumiaMds/handlers"
 )
 
-//SetupRouter calls the routes
+//SetupRouter calls the route and returns a gin engine
 func SetupRouter(handler handlers.Handler) *gin.Engine {
 	router := gin.Default()
 
