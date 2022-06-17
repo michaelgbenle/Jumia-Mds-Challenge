@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-//
+//Handler struct calls DB on its methods
 type Handler struct {
 	DB database.DB
 }
