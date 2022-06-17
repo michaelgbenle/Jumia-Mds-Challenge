@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+//DataB get environmental variables to initialize DB
 func DataB() handlers.Handler {
 	host := os.Getenv("DB_HOST")
 	user := os.Getenv("DB_USER")
