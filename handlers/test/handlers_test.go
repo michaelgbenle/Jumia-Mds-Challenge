@@ -110,4 +110,4 @@ func TestConsumeStock(t *testing.T) {
 
 }
 
-func TestGetProductBySku(t *testing.T) {}
+func TestBulkUploadFromCsv(t *testing.T) {}
