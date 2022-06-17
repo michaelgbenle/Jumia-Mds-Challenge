@@ -112,5 +112,7 @@ func TestConsumeStock(t *testing.T) {
 
 func TestBulkUploadFromCsv(t *testing.T) {
 	ctrl := gomock.NewController(t)
+	//creates a new mock instance
+	mockDB := mockdatabase.NewMockDB(ctrl)
 
 }
