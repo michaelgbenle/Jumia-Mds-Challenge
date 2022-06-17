@@ -123,7 +123,7 @@ func TestBulkUploadFromCsv(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	t.Run("Testing for successful consume", func(t *testing.T) {
+	t.Run("Testing for successful upload", func(t *testing.T) {
 		mockDB.EXPECT().SellStock(&product).Return(&order, nil).Times(1)
 
 		w := httptest.NewRecorder()
