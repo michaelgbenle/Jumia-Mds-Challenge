@@ -120,7 +120,8 @@ func TestBulkUploadFromCsv(t *testing.T) {
 
 	file := [][]string{
 		{"ma", "cbf87a9be799", "Foster-Harrell Table", "56"},
-		{"dz", "e920c573f128", "Ramirez-Molina Granite Pizza", "47"}}
+		{"dz", "e920c573f128", "Ramirez-Molina Granite Pizza", "47"}
+	}
 	fileJSON, err := json.Marshal(file)
 	if err != nil {
 		t.Fail()
