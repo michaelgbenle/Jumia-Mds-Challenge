@@ -2,6 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
+// Product model
 type Product struct {
 	gorm.Model
 	Country string `gorm:"index:idx_member,priority:2" json:"country"`
