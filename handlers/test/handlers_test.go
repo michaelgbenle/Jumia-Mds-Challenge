@@ -110,4 +110,7 @@ func TestConsumeStock(t *testing.T) {
 
 }
 
-func TestBulkUploadFromCsv(t *testing.T) {}
+func TestBulkUploadFromCsv(t *testing.T) {
+	ctrl := gomock.NewController(t)
+
+}
