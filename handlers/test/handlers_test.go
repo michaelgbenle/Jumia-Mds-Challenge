@@ -118,6 +118,6 @@ func TestBulkUploadFromCsv(t *testing.T) {
 
 	route := router.SetupRouter(h)
 
-	file := [][]string{"ma", "cbf87a9be799", "Foster-Harrell Table", "56"}
+	file := ["ma", "cbf87a9be799", "Foster-Harrell Table", "56"]
 
 }
