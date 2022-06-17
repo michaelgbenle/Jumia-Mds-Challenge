@@ -17,10 +17,12 @@ type PostgresDb struct {
 	DB *gorm.DB
 }
 
+//Export an instance of database
 func NewPostgresDb() *PostgresDb {
 	return &PostgresDb{}
 }
 
+//SetupDb auto migrates tables to database
 func (pdb *PostgresDb) SetupDb(host, user, password, dbName, port string) error {
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Africa/Lagos", host, user, password, dbName, port)

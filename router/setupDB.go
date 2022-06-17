@@ -15,11 +15,15 @@ func DataB() handlers.Handler {
 	dbName := os.Getenv("DB_NAME")
 	port := os.Getenv("DB_PORT")
 
+	//create an instatnce of postgresDB
 	Db := database.NewPostgresDb()
+
+	//Setup database using environmental variables
 	err := Db.SetupDb(host, user, password, dbName, port)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	handler := handlers.Handler{DB: Db}
 	return handler
 
