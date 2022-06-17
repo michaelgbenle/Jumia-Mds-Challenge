@@ -109,3 +109,5 @@ func TestConsumeStock(t *testing.T) {
 	})
 
 }
+
+func TestGetProductBySku(t *testing.T) {}
