@@ -119,7 +119,7 @@ func TestBulkUploadFromCsv(t *testing.T) {
 	route := router.SetupRouter(h)
 
 	file := [][]string{{"ma", "cbf87a9be799", "Foster-Harrell Table", "56"}, {"dz", "e920c573f128", "Ramirez-Molina Granite Pizza", "47"}}
-	productJSON, err := json.Marshal(product)
+	filetJSON, err := json.Marshal(file)
 	if err != nil {
 		t.Fail()
 	}
