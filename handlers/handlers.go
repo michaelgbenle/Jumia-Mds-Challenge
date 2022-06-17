@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/michaelgbenle/jumiaMds/database"
 	"github.com/michaelgbenle/jumiaMds/models"
-	"log"
 	"net/http"
 )
 
@@ -22,7 +21,6 @@ func (h *Handler) GetProductBySku(c *gin.Context) {
 	}
 	product, err := h.DB.GetProductSku(sku, country)
 	if err != nil {
-		log.Println(err)
 		c.JSON(500, gin.H{
 			"error": "error fetching data",
 		})
