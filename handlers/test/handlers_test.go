@@ -123,4 +123,14 @@ func TestBulkUploadFromCsv(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
+	t.Run("Testing for successful consume", func(t *testing.T) {
+		mockDB.EXPECT().SellStock(&product).Return(&order, nil).Times(1)
+
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("POST", "/api/v1/product/consume", strings.NewReader(string(productJSON)))
+		route.ServeHTTP(w, req)
+		assert.Contains(t, w.Body.String(), string(orderJSON))
+		assert.Equal(t, w.Code, http.StatusOK)
+
+	})
 }
