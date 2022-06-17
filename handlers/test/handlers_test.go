@@ -125,11 +125,9 @@ func TestBulkUploadFromCsv(t *testing.T) {
 	}
 	t.Run("Testing for successful upload", func(t *testing.T) {
 		mockDB.EXPECT().BulkUpload(file)
-
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest("POST", "/api/v1/product/bulkupdate", strings.NewReader(string(fileJSON)))
 		route.ServeHTTP(w, req)
-
 		assert.Equal(t, w.Code, http.StatusOK)
 	})
 }
