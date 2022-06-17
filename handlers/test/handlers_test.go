@@ -131,6 +131,5 @@ func TestBulkUploadFromCsv(t *testing.T) {
 		route.ServeHTTP(w, req)
 
 		assert.Equal(t, w.Code, http.StatusOK)
-
 	})
 }
