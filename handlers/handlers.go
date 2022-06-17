@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/michaelgbenle/jumiaMds/database"
 	"github.com/michaelgbenle/jumiaMds/models"
+	"mime/multipart"
 	"net/http"
 )
 
@@ -68,7 +69,12 @@ func (h *Handler) BulkUploadFromCsv(c *gin.Context) {
 		})
 		return
 	}
-	defer buf.Close()
+	defer func(buf multipart.File) {
+		err := buf.Close()
+		if err != nil {
+			return
+		}
+	}(buf)
 
 	reader := csv.NewReader(buf)
 
