@@ -106,7 +106,6 @@ func (pdb *PostgresDb) BulkUpload(file [][]string) {
 		}(*product)
 	}
 	//wg.Wait()
-
 }
 func (pdb *PostgresDb) SellOrCreate(product *models.Product) {
 	if int(product.Stock) < 0 {
