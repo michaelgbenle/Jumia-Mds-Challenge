@@ -128,6 +128,6 @@ func TestBulkUploadFromCsv(t *testing.T) {
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest("POST", "/api/v1/product/bulkupdate", strings.NewReader(string(fileJSON)))
 		route.ServeHTTP(w, req)
-		assert.Equal(t, w.Code, http.StatusOK)
+		assert.Equal(t, w.Code, 200)
 	})
 }
