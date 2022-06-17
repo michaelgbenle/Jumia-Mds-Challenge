@@ -124,7 +124,7 @@ func TestBulkUploadFromCsv(t *testing.T) {
 		t.Fail()
 	}
 	t.Run("Testing for successful upload", func(t *testing.T) {
-		mockDB.EXPECT().BulkUpload(&product).Return(&order, nil).Times(1)
+		mockDB.EXPECT().BulkUpload(file).Return(gomock.Any()).Times(1)
 
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest("POST", "/api/v1/product/consume", strings.NewReader(string(productJSON)))
