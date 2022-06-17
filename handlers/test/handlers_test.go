@@ -114,5 +114,8 @@ func TestBulkUploadFromCsv(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	//creates a new mock instance
 	mockDB := mockdatabase.NewMockDB(ctrl)
+	h := handlers.Handler{DB: mockDB}
+
+	route := router.SetupRouter(h)
 
 }
