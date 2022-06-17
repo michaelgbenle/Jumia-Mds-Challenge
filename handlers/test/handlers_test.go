@@ -118,4 +118,6 @@ func TestBulkUploadFromCsv(t *testing.T) {
 
 	route := router.SetupRouter(h)
 
+	file:= [["ma","cbf87a9be799","Foster-Harrell Table"]]
+
 }
