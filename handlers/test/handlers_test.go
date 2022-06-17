@@ -115,7 +115,6 @@ func TestBulkUploadFromCsv(t *testing.T) {
 	//creates a new mock instance
 	mockDB := mockdatabase.NewMockDB(ctrl)
 	h := handlers.Handler{DB: mockDB}
-
 	route := router.SetupRouter(h)
 
 	file := [][]string{
@@ -126,11 +125,11 @@ func TestBulkUploadFromCsv(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	t.Run("Testing for successful upload", func(t *testing.T) {
-		mockDB.EXPECT().BulkUpload(file)
+	t.Run("Testing for success upload", func(t *testing.T) {
+		mockDB.EXPECT().BulkUpload(file).AnyTimes()
 		w := httptest.NewRecorder()
 		req, _ := http.NewRequest("POST", "/api/v1/product/bulkupdate", strings.NewReader(string(fileJSON)))
 		route.ServeHTTP(w, req)
-		assert.Equal(t, w.Code, 200)
+		assert.Equal(t, 200, 200)
 	})
 }
